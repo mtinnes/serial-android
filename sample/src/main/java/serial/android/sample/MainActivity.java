@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             PortInfo portInfo = (PortInfo) mSpinnerPorts.getSelectedItem();
             Serial port;
             try {
-                port = new Serial.Builder(portInfo.port, Serial.BAUDRATE_115200).create();
+                port = new Serial.Builder(portInfo.port, Serial.BAUDRATE_9600).create();
                 if (port.isValid() && port.isOpen()) {
                     mPort = port;
                     mSpinnerPorts.setEnabled(false);

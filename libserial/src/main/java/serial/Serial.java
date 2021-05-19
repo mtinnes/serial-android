@@ -159,13 +159,29 @@ public class Serial implements Closeable {
      */
     public static PortInfo[] listPorts() {
         PortInfo[] ports;
-        String[] portDescs = native_listPorts();
-        if (portDescs != null && portDescs.length > 0) {
-            ports = new PortInfo[portDescs.length];
+//        String[] portDescs = native_listPorts();
+//        if (portDescs != null && portDescs.length > 0) {
+//            ports = new PortInfo[portDescs.length];
+//            int index = 0;
+//            for (String portDesc : portDescs) {
+//                String[] parts = FIELD_DELIM.split(portDesc);
+//                ports[index++] = new PortInfo(parts[0], parts[1], parts[2]);
+//            }
+//        } else {
+//            ports = null;
+//        }
+//        return ports;
+
+        SerialPortFinder mSerialPortFinder = new SerialPortFinder();
+        String[] entries = mSerialPortFinder.getAllDevices();
+        String[] entryValues = mSerialPortFinder.getAllDevicesPath();
+
+        if (entries != null && entries.length > 0) {
+            ports = new PortInfo[entries.length];
             int index = 0;
-            for (String portDesc : portDescs) {
-                String[] parts = FIELD_DELIM.split(portDesc);
-                ports[index++] = new PortInfo(parts[0], parts[1], parts[2]);
+            for (String portDesc : entries) {
+                ports[index] = new PortInfo(entryValues[index], portDesc, null);
+                index++;
             }
         } else {
             ports = null;

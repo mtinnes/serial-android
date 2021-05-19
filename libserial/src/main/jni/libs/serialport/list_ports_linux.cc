@@ -17,7 +17,6 @@
 #include <cstdarg>
 #include <cstdlib>
 
-#include <glob.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -49,6 +48,7 @@ glob(const vector<string>& patterns)
 {
     vector<string> paths_found;
 
+/**
 	if(patterns.size() == 0)
 	    return paths_found;
 
@@ -69,6 +69,7 @@ glob(const vector<string>& patterns)
     }
 
     globfree(&glob_results);
+**/
 
     return paths_found;
 }
